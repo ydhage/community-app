@@ -1,0 +1,16 @@
+.app-container {
+  min-height: 100vh;
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 1rem;
+  }
+
+  .notifications {
+    width: 250px;
+  }
+}

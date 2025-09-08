@@ -1,0 +1,135 @@
+<div class="container mt-3">
+  <!-- New Post Box -->
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <textarea [(ngModel)]="newPost.caption"
+                class="form-control mb-2"
+                placeholder="What's on your mind?"></textarea>
+      <input type="file" (change)="onFileSelected($event)" class="form-control mb-2">
+      <!-- <input type="text"
+             [(ngModel)]="newPost.imageUrl"
+             class="form-control mb-2"
+             placeholder="Image URL (optional)"> -->
+
+    <!-- preview selected image -->
+    <!-- <div *ngIf="newPost.imageUrl">
+      <img [src]="newPost.imageUrl" alt="Preview" width="150" />
+    </div> -->
+
+      <button class="btn btn-primary btn-sm" (click)="createPost()">Post</button>
+    </div>
+  </div>
+
+  <!-- Feed -->
+  <div *ngFor="let post of posts" class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <!-- Post header -->
+      <h6 class="text-muted">{{ post.user }} • {{ post.createdAt | date:'short' }}</h6>
+      <!-- Caption -->
+      <p class="mb-2">{{ post.caption }}</p>
+      <!-- Image -->
+      <img *ngIf="post.imageUrl"
+           [src]="post.imageUrl"
+           class="img-fluid rounded mb-2">
+
+      <div *ngIf="post.imageUrl">
+      <img [src]="baseUrl + post.imageUrl" 
+           alt="Post Image"
+           width="300"  class="img-fluid rounded mb-2"/>
+      </div>     
+
+      <!-- Like & Comment actions -->
+      <div class="d-flex align-items-center mb-2">
+        <button class="btn btn-outline-danger btn-sm me-2"
+                (click)="likePost(post)">
+          ❤️ {{ post.Likes?.length || 0 }}
+        </button>
+        <span class="text-muted">💬 {{ post.Comments?.length || 0 }}</span>
+      </div>
+
+      <!-- Comments list -->
+      <div *ngFor="let c of post.Comments" class="ms-3 mb-1">
+        <strong>{{ c.user }}</strong>: {{ c.text }}
+      </div>
+
+      <!-- Add comment -->
+      <input type="text"
+             [(ngModel)]="post.newComment"
+             class="form-control form-control-sm mt-2"
+             placeholder="Write a comment..."
+             (keyup.enter)="addComment(post)">
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="container mt-4">
+  <h2 class="mb-3">Community Feed</h2> -->
+
+  <!-- Create Post -->
+  <!-- <div class="card mb-4">
+    <div class="card-body">
+      <form (ngSubmit)="createPost()">
+        <textarea class="form-control mb-2" placeholder="What's on your mind?" [(ngModel)]="newPost.caption" name="caption"></textarea>
+        <input type="file" (change)="onFileSelected($event)" class="form-control mb-2">
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+  </div> -->
+
+  <!-- Feed Posts -->
+  <!-- <div *ngFor="let post of posts" class="card mb-3">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-2">
+        <img src="assets/dummy-image.webp" alt="User" class="rounded-circle me-2" width="40" height="40">
+        <strong>{{ post.username }}</strong>
+        <small class="ms-2 text-muted">{{ post.time }}</small>
+      </div>
+      
+      <p>{{ post.caption }}</p>
+      <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="img-fluid rounded mb-2">
+
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-sm btn-outline-danger" (click)="likePost(post)">
+          ❤️ {{ post.likes }}
+        </button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="toggleComments(post)">
+          💬 {{ post.comments.length }}
+        </button>
+      </div>
+
+      Comments Section -->
+      <!-- <div *ngIf="post.showComments" class="mt-2">
+        <div *ngFor="let c of post.comments" class="border rounded p-2 mb-1">
+          <strong>{{ c.user }}</strong>: {{ c.text }}
+        </div>
+        <input type="text" [(ngModel)]="post.newComment" class="form-control form-control-sm" placeholder="Write a comment..." (keyup.enter)="addComment(post)">
+      </div>
+    </div>
+  </div> --> 
+<!-- </div> -->
+
+
+
+
+
+<!-- <div class="feed">
+  <div *ngFor="let post of posts" class="card mb-3">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-2">
+        <div class="avatar rounded-circle bg-secondary me-2"></div>
+        <div>
+          <strong>{{ post.user }}</strong>
+          <small class="text-muted">{{ post.time }}</small>
+        </div>
+      </div>
+      <p>{{ post.caption }}</p>
+      <img *ngIf="post.image" [src]="post.image" class="img-fluid rounded mb-2">
+      <div>
+        <span>❤️ {{ post.likes }}</span>
+        <span class="ms-3">💬 {{ post.comments }}</span>
+      </div>
+    </div>
+  </div>
+</div> -->

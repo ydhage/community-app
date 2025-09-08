@@ -1,0 +1,9 @@
+<!-- <form (ngSubmit)="submitPost()" [formGroup]="postForm" class="p-3 border rounded"> -->
+  <div class="mb-3">
+    <textarea formControlName="caption" class="form-control" placeholder="What's on your mind?"></textarea>
+  </div>
+  <div class="mb-3">
+    <input type="file" (change)="onFileSelected($event)" class="form-control">
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!postForm.valid">Post</button>
+<!-- </form> -->

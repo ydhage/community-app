@@ -1,0 +1,37 @@
+<div class="app-container d-flex flex-column flex-lg-row">
+  <!-- Sidebar for desktop -->
+  <nav class="sidebar d-none d-lg-block p-3 bg-light">
+    <h5>Community App</h5>
+      <div>
+      <a *ngIf="!auth.isLoggedIn()" class="btn btn-outline-primary me-2" routerLink="/login">Login</a>
+      <a *ngIf="!auth.isLoggedIn()" class="btn btn-outline-success me-2" routerLink="/register">Register</a>
+      <a *ngIf="auth.isLoggedIn()" class="btn btn-outline-primary me-2" routerLink="/create-post">Create Post</a>
+      <button *ngIf="auth.isLoggedIn()" class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+    <ul class="nav flex-column mt-4">
+      <li class="nav-item"><a routerLink="/feed" class="nav-link">Home</a></li>
+      <li class="nav-item"><a routerLink="/create-post" class="nav-link">Create Post</a></li>
+      <li class="nav-item"><a routerLink="/notifications" class="nav-link">Notifications</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content -->
+  <div class="main-content flex-grow-1">
+    <!-- Top navbar for mobile -->
+    <nav class="navbar navbar-light bg-light d-lg-none justify-content-around">
+      <a routerLink="/feed" class="nav-link"><i class="bi bi-house"></i></a>
+      <a routerLink="/create-post" class="nav-link"><i class="bi bi-plus-circle"></i></a>
+      <a routerLink="/profile" class="nav-link"><i class="bi bi-person"></i></a>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Notifications sidebar (desktop) -->
+  <div class="notifications d-none d-lg-block p-3 bg-light">
+    <h6>Notifications</h6>
+    <!-- <div *ngFor="let n of notifications" class="notification-card mb-2 p-2 border rounded">
+      {{ n.text }}
+    </div> -->
+  </div>
+</div>
