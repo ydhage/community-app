@@ -10,14 +10,11 @@ const { sequelize } = require('./models');
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
 const notificationRoutes = require("./routes/notification");
-
-// मोठं payload allow करा (उदा. 10mb)
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 app.use(cors());
 
-// uploads फोल्डर public करा (images serve करण्यासाठी)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
