@@ -3,7 +3,6 @@ const router = express.Router();
 const { Post, Like, Comment } = require('../models');
 const upload = require('../middleware/upload'); // ✅ multer middleware
 
-// ✅ GET all posts (likes + comments सहित)
 router.get('/', async (req, res) => {
   try {
     const posts = await Post.findAll({
@@ -23,7 +22,6 @@ router.post('/', upload.single('image'), async (req, res) => {
       return res.status(400).json({ message: 'caption & user required' });
     }
 
-    // जर file आला असेल तर त्याचा path DB मध्ये ठेवा
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const post = await Post.create({ caption, imageUrl, user });
@@ -47,8 +45,6 @@ router.post('/', upload.single('image'), async (req, res) => {
 //   } catch (e) { res.status(500).json({ message: e.message }); }
 // });
 
-
-// ✅ LIKE toggle (notifications काढले आहेत)
 router.post('/:postId/like', async (req, res) => {
   try {
     const { user } = req.body;
@@ -56,7 +52,6 @@ router.post('/:postId/like', async (req, res) => {
 
     if (!user) return res.status(400).json({ message: 'user required' });
 
-    // आधी like केलेलं आहे का तपासा
     const existingLike = await Like.findOne({ where: { user, PostId: postId } });
 
     if (existingLike) {
