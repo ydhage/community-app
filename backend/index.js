@@ -3,9 +3,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 dotenv.config();
-const app = express(); // ✅ आधी app initialize करा
+const app = express();
 const { sequelize } = require('./models');
-// const sequelize = require('./config/db'); // जर दुसरी config फाईल असेल तर
+// const sequelize = require('./config/db');
 
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
@@ -30,7 +30,7 @@ sequelize.authenticate()
   .then(() => console.log('✅ Database connected'))
   .catch(err => console.error('❌ DB error:', err));
 
-sequelize.sync({ alter: true }) // dev साठी ठीक; prod मध्ये migrations वापरा
+sequelize.sync({ alter: true }) 
   .then(() => console.log('✅ Models synced'));
 
 // DB Sync
